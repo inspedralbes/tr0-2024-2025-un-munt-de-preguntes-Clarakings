@@ -4,18 +4,18 @@ let estadoDeLaPartida = {
     preguntes: []
 };
 
-fetch('http://localhost/preguntes.json')
+fetch('http://localhost/proyecto_a/backend/carregar_preguntes.php')
     .then(response => response.json())
     .then(data => {
       console.log(data)
       mostrarTest(data)
-      verificarRespuestas(data)
+      //verificarRespuestas(data)
     });
 
 
 // Función para mostrar las preguntas del test
 function mostrarTest(info) {
-  data = info.preguntes;
+  data = info;
   htmlString='';
   htmlString+="<h2>Test de Autoescuela</h2>";
   
