@@ -15,8 +15,25 @@ $preguntas_aleatorias = array_rand($preguntas, 10);
 // Crear un array con las preguntas seleccionadas
 $preguntas_seleccionadas = [];
 foreach ($preguntas_aleatorias as $indice) {
-    $preguntas_seleccionadas[] = $preguntas[$indice];
+    // Obtener la pregunta actual
+    $pregunta_actual = $preguntas[$indice];
+    
+    // Combinar respuestas correctas e incorrectas
+    $respuestas = array_merge([$pregunta_actual['resposta_correcta']], $pregunta_actual['respostes_incorrectes']);
+    
+    // Mezclar las respuestas
+    shuffle($respuestas);
+    
+    // Crear un nuevo array con la pregunta y las respuestas mezcladas
+    $preguntas_seleccionadas[] = [
+        'pregunta' => $pregunta_actual['pregunta'],
+        'respuestas' => $respuestas,
+        'imatge' => $pregunta_actual['imatge']
+    ];
 }
+
+// Guardar las preguntas seleccionadas en la sesión
+$_SESSION['preguntas'] = $preguntas_seleccionadas;
 
 // Enviar las preguntas seleccionadas en formato JSON
 header('Content-Type: application/json');

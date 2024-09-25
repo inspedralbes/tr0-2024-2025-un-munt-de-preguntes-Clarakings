@@ -28,12 +28,12 @@ function mostrarTest(info) {
           htmlString+="<img src='imagenes/" + data[i].imatge + "' width='200'><br>";
       }
 
+      // Mostrar las respuestas 
       htmlString += "<div id='pregunta" + i + "'>";
-        htmlString += "<button onclick='marcarRespuesta(\"" + i + "\", \"" + data[i].resposta_correcta + "\")'>" + data[i].resposta_correcta + "</button><br>";
-        for (let j = 0; j < data[i].respostes_incorrectes.length; j++) {
-            htmlString += "<button onclick='marcarRespuesta(\"" + i + "\", \"" + data[i].respostes_incorrectes[j] + "\")'>" + data[i].respostes_incorrectes[j] + "</button><br>";
-        }
-        htmlString += "</div><br>";
+      for (let j = 0; j < data[i].respuestas.length; j++) {
+          htmlString += "<button onclick='marcarRespuesta(\"" + i + "\", \"" + data[i].respuestas[j] + "\")'>" + data[i].respuestas[j] + "</button><br>";
+      }
+      htmlString += "</div><br>";
   }
 
   // Botón para verificar las respuestas
