@@ -1,8 +1,15 @@
 <?php
-// Cargar el archivo JSON con las preguntas y respuestas correctas
-$json_file = 'preguntes.json';
-$json_data = file_get_contents($json_file);
-$preguntas = json_decode($json_data, true)['preguntes'];
+// Iniciar la sesión
+session_start();
+
+// Comprobar si existen preguntas en la sesión
+if (!isset($_SESSION['preguntas'])) {
+    echo json_encode(['error' => 'No hay preguntas almacenadas en la sesión.']);
+    exit();
+}
+
+// Obtener las preguntas desde la sesión
+$preguntas = $_SESSION['preguntas'];
 
 // Obtener las respuestas enviadas desde el frontend
 $input = file_get_contents("php://input");
@@ -16,7 +23,7 @@ foreach ($respuestas_seleccionadas as $respuesta) {
             $resultados[] = [
                 'pregunta' => $pregunta['pregunta'],
                 'respuestaSeleccionada' => $respuesta['respuestaSeleccionada'],
-                'respuestaCorrecta' => $pregunta['resposta_correcta']
+                'respuestaCorrecta' => $pregunta['resposta_correcta'],// Suponiendo que la primera respuesta es la correcta
             ];
         }
     }

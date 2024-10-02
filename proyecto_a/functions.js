@@ -2,60 +2,130 @@ let data;
 let estadoDeLaPartida = {
     contadorPreguntes: 0,
     preguntes: [],
-    respuestasSeleccionadas: [] // Aquí almacenamos las respuestas seleccionadas por el usuario
+    respuestasSeleccionadas: [], 
+    tiempoInicio: null, 
+    tiempoFin: null, 
+    intervaloCronometro: null,
+    nombreUsuario: '',  // Almacena el nombre del usuario
+    cantidadPreguntas: 0  // Almacena la cantidad de preguntas a responder
 };
 
-// Cargar las preguntas desde el backend
-fetch('http://localhost:8888/proyecto_a/backend/carregar_preguntes.php')
-    .then(response => response.json())
-    .then(info => {
-        console.log(info);
-        data = info; // Asignamos las preguntas al objeto data
-        estadoDeLaPartida.preguntes = data;
-        mostrarPreguntaActual(); // Iniciamos el test con la primera pregunta
-    });
+// Función para iniciar el cronómetro
+function iniciarCronometro() {
+    estadoDeLaPartida.tiempoInicio = new Date(); 
+
+    estadoDeLaPartida.intervaloCronometro = setInterval(function() {
+        const tiempoActual = new Date();
+        const tiempoTranscurrido = Math.floor((tiempoActual - estadoDeLaPartida.tiempoInicio) / 1000);
+
+        document.getElementById('cronometro').innerText = "Tiempo: " + tiempoTranscurrido + " segundos";
+    }, 1000); 
+}
+
+// Función para detener el cronómetro
+function detenerCronometro() {
+    clearInterval(estadoDeLaPartida.intervaloCronometro);
+}
+
+// Función para mostrar el menú inicial
+function mostrarMenuInicial() {
+    let htmlString = "<h2>Bienvenido al Test de Autoescuela</h2>";
+    htmlString += "<button id='boton-jugar' onclick='preguntarNombreYCantidad()'>Jugar</button><br><br>";
+    htmlString += "<button id='boton-modificar' onclick='modificarPreguntas()'>Modificar preguntas</button>";
+
+    document.getElementById("test-container").innerHTML = htmlString;
+}
+
+// Función para pedir nombre y cantidad de preguntas
+function preguntarNombreYCantidad() {
+    let htmlString = "<h2>Introduce tu nombre y elige cuántas preguntas quieres responder</h2>";
+    htmlString += "<label for='nombreUsuario'>Nombre:</label><br>";
+    htmlString += "<input type='text' id='nombreUsuario' name='nombreUsuario'><br><br>";
+    htmlString += "<label for='cantidadPreguntas'>Cantidad de preguntas (máximo 20):</label><br>";
+    htmlString += "<input type='number' id='cantidadPreguntas' name='cantidadPreguntas' min='1' max='20'><br><br>";
+    htmlString += "<button id='boton-iniciar' onclick='validarDatosYIniciarJuego()'>Iniciar Test</button>";
+
+    document.getElementById("test-container").innerHTML = htmlString;
+}
+
+// Función para validar los datos e iniciar el juego
+function validarDatosYIniciarJuego() {
+    const nombreUsuario = document.getElementById('nombreUsuario').value;
+    const cantidadPreguntas = parseInt(document.getElementById('cantidadPreguntas').value);
+
+    // Validar que el nombre no esté vacío y que la cantidad de preguntas sea válida
+    if (!nombreUsuario || isNaN(cantidadPreguntas) || cantidadPreguntas <= 0 || cantidadPreguntas > 20) {
+        alert('Por favor, introduce un nombre válido y selecciona una cantidad de preguntas entre 1 y 20.');
+        return;
+    }
+
+    // Almacenar el nombre y la cantidad de preguntas en el estado
+    estadoDeLaPartida.nombreUsuario = nombreUsuario;
+    estadoDeLaPartida.cantidadPreguntas = cantidadPreguntas;
+
+    // Iniciar el juego
+    iniciarJuego();
+}
+
+// Función para iniciar el juego cargando las preguntas desde el backend
+function iniciarJuego() {
+    // Cargar las preguntas desde el backend
+    fetch('http://localhost:8888/proyecto_a/backend/carregar_preguntes.php')
+        .then(response => response.json())
+        .then(info => {
+            console.log(info);
+            data = info;
+            
+            // Limitar las preguntas según lo que haya elegido el usuario
+            estadoDeLaPartida.preguntes = data.slice(0, estadoDeLaPartida.cantidadPreguntas);
+
+            mostrarPreguntaActual(); 
+        });
+}
+
+// Función para redirigir a la página de modificación de preguntas
+function modificarPreguntas() {
+    window.location.href = "modificar_preguntas.html"; 
+}
 
 // Función para mostrar la pregunta actual
 function mostrarPreguntaActual() {
     const preguntaActual = estadoDeLaPartida.preguntes[estadoDeLaPartida.contadorPreguntes];
 
+    if (estadoDeLaPartida.contadorPreguntes === 0) {
+        iniciarCronometro(); 
+    }
+
     let htmlString = '';
     htmlString += "<h2>Test de Autoescuela</h2>";
-
-    // Mostrar la pregunta
+    htmlString += "<h3>Nombre: " + estadoDeLaPartida.nombreUsuario + "</h3>";
     htmlString += "<p>" + preguntaActual.pregunta + "</p>";
 
-    // Mostrar la imagen si existe
     if (preguntaActual.imatge) {
         htmlString += "<img src='imagenes/" + preguntaActual.imatge + "' width='200'><br>";
     }
 
-    // Mostrar las respuestas
     htmlString += "<div id='pregunta" + estadoDeLaPartida.contadorPreguntes + "'>";
     for (let j = 0; j < preguntaActual.respuestas.length; j++) {
         htmlString += "<button class='respuesta' id='respuesta-" + estadoDeLaPartida.contadorPreguntes + "-" + j + "' onclick='marcarRespuesta(" + estadoDeLaPartida.contadorPreguntes + ", \"" + preguntaActual.respuestas[j] + "\")'>" + preguntaActual.respuestas[j] + "</button><br>";
     }
     htmlString += "</div><br>";
 
-    // Mostrar el contenido en el contenedor
     document.getElementById("test-container").innerHTML = htmlString;
 }
 
 // Función para marcar y guardar la respuesta seleccionada
 function marcarRespuesta(preguntaIndex, respuestaSeleccionada) {
-    console.log("Pregunta index:", preguntaIndex); // Debug: Comprobamos que el índice de la pregunta es correcto
-    console.log("Respuesta seleccionada:", respuestaSeleccionada); // Debug: Comprobamos que la respuesta seleccionada es correcta
+    console.log("Pregunta index:", preguntaIndex);
+    console.log("Respuesta seleccionada:", respuestaSeleccionada);
 
-    // Verificar que data esté definido y tenga preguntas
     if (data && data[preguntaIndex]) {
-        // Almacenar la respuesta seleccionada en el estado de la partida
         estadoDeLaPartida.respuestasSeleccionadas[preguntaIndex] = {
             pregunta: data[preguntaIndex].pregunta,
             respuestaSeleccionada: respuestaSeleccionada
         };
         console.log("Respuesta marcada para la pregunta " + (preguntaIndex + 1) + ": " + respuestaSeleccionada);
 
-        // Después de marcar la respuesta, pasar a la siguiente pregunta o terminar el test
         siguientePregunta();
     } else {
         console.error('Error: Pregunta no encontrada en el índice ' + preguntaIndex);
@@ -64,25 +134,21 @@ function marcarRespuesta(preguntaIndex, respuestaSeleccionada) {
 
 // Función para pasar a la siguiente pregunta
 function siguientePregunta() {
-    // Incrementar el contador de preguntas
     estadoDeLaPartida.contadorPreguntes++;
 
-    // Si aún quedan preguntas, mostrar la siguiente pregunta
     if (estadoDeLaPartida.contadorPreguntes < estadoDeLaPartida.preguntes.length) {
         mostrarPreguntaActual();
-    } 
-    // Si ya no quedan preguntas, enviar las respuestas al backend
-    else {
+    } else {
+        estadoDeLaPartida.tiempoFin = new Date();
+        detenerCronometro();
         enviarRespuestas();
     }
 }
 
 // Función para enviar las respuestas seleccionadas al backend
 function enviarRespuestas() {
-    // Crear un objeto con las respuestas seleccionadas
     const respuestasAEnviar = estadoDeLaPartida.respuestasSeleccionadas;
 
-    // Enviar las respuestas al backend mediante fetch
     fetch('http://localhost:8888/proyecto_a/backend/corregir_respuestas.php', {
         method: 'POST',
         headers: {
@@ -103,25 +169,34 @@ function enviarRespuestas() {
 // Función para mostrar los resultados de la corrección
 function mostrarResultados(resultado) {
     let htmlString = "<h2>Resultados</h2>";
-    for (let i = 0; i < resultado.length; i++) {
-        const preguntaIndex = i;
+    let respuestasCorrectas = 0;
 
-        // Limpiar las respuestas anteriores
+    for (let i = 0; i < resultado.length; i++) {
+        if (resultado[i].respuestaSeleccionada === resultado[i].respuestaCorrecta) {
+            respuestasCorrectas++;
+        }
+    }
+
+    const tiempoTotal = (estadoDeLaPartida.tiempoFin - estadoDeLaPartida.tiempoInicio) / 1000;
+
+    htmlString += "<h3>Has acertado " + respuestasCorrectas + " de " + resultado.length + " preguntas.</h3>";
+    htmlString += "<hr>";
+
+    for (let i = 0; i < resultado.length; i++) {
         let htmlRespuesta = '';
 
-        // Si la respuesta es correcta
         if (resultado[i].respuestaSeleccionada === resultado[i].respuestaCorrecta) {
-            htmlRespuesta += "<p>Tu respuesta: " + resultado[i].respuestaSeleccionada + " (Correcta)</p>";
-        } 
-        // Si la respuesta es incorrecta
-        else {
-            htmlRespuesta += "<p>Tu respuesta: " + resultado[i].respuestaSeleccionada + " (Incorrecta)</p>";
+            htmlRespuesta += "<p>Pregunta " + (i + 1) + ": Tu respuesta: " + resultado[i].respuestaSeleccionada + " (Correcta)</p>";
+        } else {
+            htmlRespuesta += "<p>Pregunta " + (i + 1) + ": Tu respuesta: " + resultado[i].respuestaSeleccionada + " (Incorrecta)</p>";
             htmlRespuesta += "<p>Respuesta correcta: " + resultado[i].respuestaCorrecta + "</p>";
         }
 
         htmlString += htmlRespuesta + "<hr>";
     }
 
-    // Mostrar los resultados finales
     document.getElementById("test-container").innerHTML = htmlString;
 }
+
+// Mostrar el menú inicial cuando se carga la página
+window.onload = mostrarMenuInicial;
