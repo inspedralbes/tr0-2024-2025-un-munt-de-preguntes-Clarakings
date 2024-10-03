@@ -5,6 +5,7 @@ session_start();
 // Configuración de la base de datos
 $host = 'localhost'; // Cambia esto a tu host de la base de datos
 $usuario = 'root'; // Cambia esto a tu usuario
+$password = ''; // Añade aquí la contraseña si es necesario
 $base_datos = 'autoescuela'; // Cambia esto al nombre de tu base de datos
 
 // Conectar a la base de datos
@@ -38,17 +39,14 @@ if ($result->num_rows > 0) {
         ];
     }
 
-    // Seleccionar 10 preguntas al azar
-    $preguntas_aleatorias = array_rand($preguntas, 20);
+    // Barajar todas las preguntas
+    shuffle($preguntas);
 
     // Crear un array con las preguntas seleccionadas
     $preguntas_seleccionadas = [];
     $preguntas_a_enviar = []; // Este array será para enviar al frontend
 
-    foreach ($preguntas_aleatorias as $indice) {
-        // Obtener la pregunta actual
-        $pregunta_actual = $preguntas[$indice];
-        
+    foreach ($preguntas as $pregunta_actual) {
         // Combinar respuestas correctas e incorrectas
         $respuestas = array_merge([$pregunta_actual['resposta_correcta']], $pregunta_actual['respostes_incorrectes']);
         

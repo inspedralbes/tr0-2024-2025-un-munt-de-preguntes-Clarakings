@@ -2,9 +2,9 @@ let data;
 let estadoDeLaPartida = {
     contadorPreguntes: 0,
     preguntes: [],
-    respuestasSeleccionadas: [], 
-    tiempoInicio: null, 
-    tiempoFin: null, 
+    respuestasSeleccionadas: [],
+    tiempoInicio: null,
+    tiempoFin: null,
     intervaloCronometro: null,
     nombreUsuario: '',  // Almacena el nombre del usuario
     cantidadPreguntas: 0  // Almacena la cantidad de preguntas a responder
@@ -12,14 +12,15 @@ let estadoDeLaPartida = {
 
 // Función para iniciar el cronómetro
 function iniciarCronometro() {
-    estadoDeLaPartida.tiempoInicio = new Date(); 
+    estadoDeLaPartida.tiempoInicio = new Date();
 
-    estadoDeLaPartida.intervaloCronometro = setInterval(function() {
+    estadoDeLaPartida.intervaloCronometro = setInterval(function () {
         const tiempoActual = new Date();
         const tiempoTranscurrido = Math.floor((tiempoActual - estadoDeLaPartida.tiempoInicio) / 1000);
 
+        // Actualiza el cronómetro dentro de test-container
         document.getElementById('cronometro').innerText = "Tiempo: " + tiempoTranscurrido + " segundos";
-    }, 1000); 
+    }, 1000);
 }
 
 // Función para detener el cronómetro
@@ -27,14 +28,13 @@ function detenerCronometro() {
     clearInterval(estadoDeLaPartida.intervaloCronometro);
 }
 
-// Función para mostrar el menú inicial
+// Modificar la función mostrarMenuInicial para incluir la opción de agregar pregunta
 function mostrarMenuInicial() {
     let htmlString = "<h2>Bienvenido al Test de Autoescuela</h2>";
     htmlString += "<button id='boton-jugar' onclick='preguntarNombreYCantidad()'>Jugar</button><br><br>";
-    htmlString += "<button id='boton-modificar' onclick='modificarPreguntas()'>Modificar preguntas</button>";
-
     document.getElementById("test-container").innerHTML = htmlString;
 }
+
 
 // Función para pedir nombre y cantidad de preguntas
 function preguntarNombreYCantidad() {
@@ -75,17 +75,12 @@ function iniciarJuego() {
         .then(info => {
             console.log(info);
             data = info;
-            
+
             // Limitar las preguntas según lo que haya elegido el usuario
             estadoDeLaPartida.preguntes = data.slice(0, estadoDeLaPartida.cantidadPreguntas);
 
-            mostrarPreguntaActual(); 
+            mostrarPreguntaActual();
         });
-}
-
-// Función para redirigir a la página de modificación de preguntas
-function modificarPreguntas() {
-    window.location.href = "modificar_preguntas.html"; 
 }
 
 // Función para mostrar la pregunta actual
@@ -93,7 +88,9 @@ function mostrarPreguntaActual() {
     const preguntaActual = estadoDeLaPartida.preguntes[estadoDeLaPartida.contadorPreguntes];
 
     if (estadoDeLaPartida.contadorPreguntes === 0) {
-        iniciarCronometro(); 
+        // Mueve el cronómetro a la parte superior del contenedor antes de iniciar
+        document.getElementById('test-container').innerHTML += "<div id='cronometro' style='font-size: 20px; margin-bottom: 20px;'></div>";
+        iniciarCronometro();
     }
 
     let htmlString = '';
@@ -195,8 +192,8 @@ function mostrarResultados(resultado) {
         htmlString += htmlRespuesta + "<hr>";
     }
 
+    htmlString += "<h3>Tiempo total: " + Math.floor(tiempoTotal) + " segundos.</h3>";
     document.getElementById("test-container").innerHTML = htmlString;
 }
-
-// Mostrar el menú inicial cuando se carga la página
-window.onload = mostrarMenuInicial;
+// Llama a la función para mostrar el menú inicial al cargar la página
+mostrarMenuInicial();
