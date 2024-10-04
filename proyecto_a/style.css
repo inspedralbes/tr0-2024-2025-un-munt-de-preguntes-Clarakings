@@ -33,13 +33,24 @@ h1 {
 /* Cronómetro */
 #cronometro {
     font-size: 1.4em;
-    color: #27ae60; /* Color del texto */
-    text-align: center; /* Centrar el texto */
-    margin-bottom: 20px; /* Espacio inferior */
-    border: 2px solid #27ae60; /* Borde verde */
-    border-radius: 5px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
-    background-color: #ecf9ec; /* Fondo claro */
+    color: #27ae60;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid #27ae60;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ecf9ec;
+    display: none; 
+}
+
+/* Clase para mostrar el cronómetro */
+.visible {
+    display: block !important; 
+}
+
+/* Clase no mostrar el cronómetro */
+.invisible{
+    display: none;
 }
 
 /* Preguntas y Respuestas */

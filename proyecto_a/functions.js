@@ -30,6 +30,7 @@ function detenerCronometro() {
 
 // Modificar la función mostrarMenuInicial para incluir la opción de agregar pregunta
 function mostrarMenuInicial() {
+    document.getElementById('cronometro').classList.add('invisible');
     let htmlString = "<h2>Bienvenido al Test de Autoescuela</h2>";
     htmlString += "<button id='boton-jugar' onclick='preguntarNombreYCantidad()'>Jugar</button><br><br>";
     document.getElementById("test-container").innerHTML = htmlString;
@@ -84,13 +85,14 @@ function iniciarJuego() {
 }
 
 // Función para mostrar la pregunta actual
+// Función para mostrar la pregunta actual
 function mostrarPreguntaActual() {
     const preguntaActual = estadoDeLaPartida.preguntes[estadoDeLaPartida.contadorPreguntes];
 
     if (estadoDeLaPartida.contadorPreguntes === 0) {
-        // Mueve el cronómetro a la parte superior del contenedor antes de iniciar
-        document.getElementById('test-container').innerHTML += "<div id='cronometro' style='font-size: 20px; margin-bottom: 20px;'></div>";
-        iniciarCronometro();
+        // Mostrar el cronómetro cuando empiecen las preguntas
+        document.getElementById('cronometro').classList.add('visible'); // Añadir la clase 'visible' para mostrarlo
+        iniciarCronometro(); // Iniciar el cronómetro cuando empieza la primera pregunta
     }
 
     let htmlString = '';
@@ -193,7 +195,22 @@ function mostrarResultados(resultado) {
     }
 
     htmlString += "<h3>Tiempo total: " + Math.floor(tiempoTotal) + " segundos.</h3>";
+    htmlString += "<button onclick='mostrarMenuInicial();reiniciarCronometroYEstado()'>Volver al Menú Inicial</button>";
     document.getElementById("test-container").innerHTML = htmlString;
+}
+function reiniciarCronometroYEstado() {
+    // Si el cronómetro está corriendo, lo detenemos
+    if (estadoDeLaPartida.intervaloCronometro) {
+        clearInterval(estadoDeLaPartida.intervaloCronometro);
+    }
+
+    // Reiniciamos las variables del estado de la partida
+    estadoDeLaPartida.contadorPreguntes = 0;
+    estadoDeLaPartida.preguntes = [];
+    estadoDeLaPartida.respuestasSeleccionadas = [];
+    estadoDeLaPartida.tiempoInicio = null;
+    estadoDeLaPartida.tiempoFin = null;
+    estadoDeLaPartida.intervaloCronometro = null;
 }
 // Llama a la función para mostrar el menú inicial al cargar la página
 mostrarMenuInicial();
