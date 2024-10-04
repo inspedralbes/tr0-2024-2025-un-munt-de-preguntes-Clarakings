@@ -1,4 +1,4 @@
-# Documentació bàsica del projecte
+# Documentació bàsica del projecte Clara Reyes
 Alguns dels punts que han de quedar explicats:
  * Objectius
  * Arquitectura bàsica

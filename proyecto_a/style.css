@@ -1,0 +1,164 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+#all {
+    background-color: #fff;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-height: 90vh; /* Limita la altura máxima para que no sobrepase la pantalla */
+    overflow-y: auto; /* Añade scroll vertical si el contenido excede la altura */
+}
+
+/* Cronómetro */
+#cronometro {
+    font-size: 1.4em;
+    color: #27ae60;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid #27ae60;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ecf9ec;
+    display: none; 
+}
+
+/* Clase para mostrar el cronómetro */
+.visible {
+    display: block !important; 
+}
+
+/* Clase no mostrar el cronómetro */
+.invisible{
+    display: none;
+}
+
+/* Preguntas y Respuestas */
+h2 {
+    font-size: 1.8em;
+    color: #34495e;
+}
+
+h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: #7f8c8d;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Buttons */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 1.1em;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Answer Buttons */
+.respuesta {
+    background-color: #e74c3c;
+    border: none;
+    padding: 10px;
+    font-size: 1.1em;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.respuesta:hover {
+    background-color: #c0392b;
+}
+
+/* Images */
+img {
+    margin: 20px 0;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Results */
+#estat {
+    font-size: 1.5em;
+    color: #8e44ad;
+    margin-top: 20px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 20px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        height: auto;
+    }
+
+    #test-container {
+        width: 90%;
+        margin: 0 auto;
+        padding: 15px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+    }
+}

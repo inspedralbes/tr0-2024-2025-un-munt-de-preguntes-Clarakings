@@ -1,0 +1,130 @@
+{
+  "preguntes": [
+    {
+      "pregunta": "Quina és la velocitat màxima permesa en autopistes d'Espanya per a vehicles lleugers?",
+      "resposta_correcta": "120 km/h",
+      "respostes_incorrectes": ["100 km/h", "130 km/h", "110 km/h"],
+      "imatge": "velocidad.jpeg"
+    },
+    {
+      "pregunta": "Quin senyal indica aquesta imatge?",
+      "resposta_correcta": "Senyal de STOP",
+      "respostes_incorrectes": ["Senyal de cedir el pas", "Senyal de prohibició", "Senyal de direcció prohibida"],
+      "imatge": "stop.jpg"
+    },
+    {
+      "pregunta": "Què significa un semàfor en ambre intermitent?",
+      "resposta_correcta": "Precaució, passar si no hi ha perill",
+      "respostes_incorrectes": ["Aturar-se completament", "Accelerar", "Està espatllat"],
+      "imatge": "semaforo.jpg"
+    },
+    {
+      "pregunta": "Quan és obligatori utilitzar els llums de carretera?",
+      "resposta_correcta": "De nit i en trams sense il·luminació",
+      "respostes_incorrectes": ["Durant el dia", "Només quan plou", "En qualsevol moment"],
+      "imatge": "luces.jpg"
+    },
+    {
+      "pregunta": "Quin document és obligatori portar en tot moment quan condueixes un vehicle?",
+      "resposta_correcta": "Permís de conduir",
+      "respostes_incorrectes": ["Còpia del DNI", "Assegurança del cotxe", "Targeta sanitària"],
+      "imatge": "documento.jpg"
+    },
+    {
+      "pregunta": "A quina edat es pot obtenir el permís de conduir tipus B a Espanya?",
+      "resposta_correcta": "18 anys",
+      "respostes_incorrectes": ["16 anys", "21 anys", "20 anys"],
+      "imatge": "carnet.jpg"
+    },
+    {
+      "pregunta": "En quin cas s'ha de cedir el pas a un vehicle d'emergència?",
+      "resposta_correcta": "Sempre que estigui en servei i amb senyals lluminosos o acústics activats",
+      "respostes_incorrectes": ["Només quan va amb llums blaus", "Només en autopista", "Només de nit"],
+      "imatge": "ceder.jpg"
+    },
+    {
+      "pregunta": "Quin és el temps mínim de reacció d'un conductor mitjà en situacions normals?",
+      "resposta_correcta": "1 segon",
+      "respostes_incorrectes": ["0,5 segons", "2 segons", "3 segons"],
+      "imatge": "reaccion.jpeg"
+    },
+    {
+      "pregunta": "Què indica una línia contínua en el centre de la calçada?",
+      "resposta_correcta": "Prohibició d'avançar",
+      "respostes_incorrectes": ["Es pot avançar amb precaució", "Carril preferent", "Zona d'estacionament"],
+      "imatge": "continua.jpg"
+    },
+    {
+      "pregunta": "En quin cas es pot fer un canvi de sentit en una carretera?",
+      "resposta_correcta": "Quan no hi ha senyals que ho prohibeixen i és segur",
+      "respostes_incorrectes": ["Sempre que no hi hagi trànsit", "Només en zones urbanes", "Només en autopistes"],
+      "imatge": "sentido.jpg"
+    },
+    {
+      "pregunta": "Quina és la velocitat màxima permesa en zones residencials a Espanya?",
+      "resposta_correcta": "20 km/h",
+      "respostes_incorrectes": ["30 km/h", "50 km/h", "10 km/h"],
+      "imatge": "residencial.jpg"
+    },
+    {
+      "pregunta": "Què significa una senyal de fletxa blava cap avall?",
+      "resposta_correcta": "Inici de carril obligatori",
+      "respostes_incorrectes": ["Final de carril", "Carril opcional", "Carril prohibit"],
+      "imatge": "senyal.jpg"
+    },
+    {
+      "pregunta": "Quin tipus de vehicle està exempt de portar cinturó de seguretat?",
+      "resposta_correcta": "Vehicles d'emergència en servei",
+      "respostes_incorrectes": ["Vehicles elèctrics", "Autobusos", "Cotxes de més de 10 anys"],
+      "imatge": "cinturon.jpg"
+    },
+    {
+      "pregunta": "Què és una rotonda?",
+      "resposta_correcta": "Una intersecció amb circulació en sentit giratori",
+      "respostes_incorrectes": ["Un carrer sense sortida", "Un lloc d'aparcament", "Una zona d'estacionament temporal"],
+      "imatge": "rotonda.jpg"
+    },
+    {
+      "pregunta": "Quan és obligatori utilitzar les llums d'emergència?",
+      "resposta_correcta": "En cas de perill o avaria",
+      "respostes_incorrectes": ["Sempre que plou", "De nit", "Quan no hi ha il·luminació pública"],
+      "imatge": "emergencia.jpg"
+    },
+    {
+      "pregunta": "Com es pot evitar l'aquaplaning?",
+      "resposta_correcta": "Reduint la velocitat i mantenint pneumàtics en bon estat",
+      "respostes_incorrectes": ["Accelerant més", "Utilitzant el fre de mà", "Augmentant la pressió dels pneumàtics"],
+      "imatge": "agua.jpg"
+    },
+    {
+      "pregunta": "Quan es pot avançar per la dreta a Espanya?",
+      "resposta_correcta": "En vies amb circulació en carrils marcats i quan el vehicle de l'esquerra gira a l'esquerra",
+      "respostes_incorrectes": ["Mai", "Quan no hi ha trànsit", "Quan estàs en una rotonda"],
+      "imatge": "adelantar.jpg"
+    },
+    {
+      "pregunta": "Què indica un senyal triangular amb una vora vermella?",
+      "resposta_correcta": "Perill",
+      "respostes_incorrectes": ["Prohibició", "Obligació", "Final d'obligació"],
+      "imatge": "peligro.jpg"
+    },
+    {
+      "pregunta": "Quina és la distància de seguretat recomanada amb pluja intensa?",
+      "resposta_correcta": "Almenys el doble de la distància en condicions normals",
+      "respostes_incorrectes": ["La mateixa distància que en condicions normals", "Reduir a la meitat", "Cap distància"],
+      "imatge": "lluvia.jpg"
+    },
+    {
+      "pregunta": "Quan és necessari utilitzar el retrovisor exterior dret?",
+      "resposta_correcta": "Quan es vol canviar de carril o avançar",
+      "respostes_incorrectes": ["Només de nit", "Només quan plou", "Quan s'estaciona en un lloc ampli"],
+      "imatge": "retrovisor.jpg"
+    },
+    {
+      "pregunta": "Com s'ha d'actuar en un accident amb ferits?",
+      "resposta_correcta": "Aturar-se, senyalitzar la zona, avisar als serveis d'emergència i assistir els ferits",
+      "respostes_incorrectes": ["Continuar la marxa", "Cridar als serveis d'emergència i marxar", "Esperar sense fer res"],
+      "imatge": "accidente.jpg"
+    }
+  ]
+}
