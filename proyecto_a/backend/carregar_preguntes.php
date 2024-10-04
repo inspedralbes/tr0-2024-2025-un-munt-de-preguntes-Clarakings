@@ -2,19 +2,8 @@
 // Iniciar la sesión
 session_start();
 
-// Configuración de la base de datos
-$host = 'localhost'; // Cambia esto a tu host de la base de datos
-$usuario = 'root'; // Cambia esto a tu usuario
-$password = ''; // Añade aquí la contraseña si es necesario
-$base_datos = 'autoescuela'; // Cambia esto al nombre de tu base de datos
-
-// Conectar a la base de datos
-$conn = new mysqli($host, $usuario, $password, $base_datos);
-
-// Comprobar la conexión
-if ($conn->connect_error) {
-    die('Error de conexión: ' . $conn->connect_error);
-}
+// Incluir el archivo de conexión
+include 'conexion.php';
 
 // Consultar las preguntas y sus respuestas
 $sql = "SELECT id, pregunta, resposta_correcta, resposta_incorrecta_1, resposta_incorrecta_2, resposta_incorrecta_3, imatge FROM preguntes";
